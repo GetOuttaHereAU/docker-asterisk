@@ -1,4 +1,5 @@
 FROM debian:bullseye
+LABEL org.opencontainers.image.source=https://github.com/getouttahereau/docker-asterisk
 
 ENV ASTERISK_VERSION=18.6.0 \
     RTP_START=10000 \
