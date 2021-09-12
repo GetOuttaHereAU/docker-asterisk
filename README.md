@@ -1,5 +1,7 @@
 # getouttahereau/docker-asterisk
 
+![Docker Publish workflow](https://github.com/getouttahereau/docker-asterisk/actions/workflows/docker-publish.yml/badge.svg)
+
 This will build a Docker image for Asterisk - a software implementation of private branch exchange (PBX).
 
 * Debian 11.0 Bullseye
