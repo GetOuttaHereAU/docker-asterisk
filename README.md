@@ -4,12 +4,14 @@ This will build a Docker image for Asterisk - a software implementation of priva
 
 * Debian 11.0 Bullseye
 * Asterisk 18.6.0
-* Optional [Cisco Enterprise IP Phone support](https://usecallmanager.nz)
+* Optional Cisco Enterprise IP Phone support thanks to [usecallmanager.nz](https://usecallmanager.nz/)
 
-You can build the Docker image yourself, or find the pre-built Docker image that is available on DockerHub.
+You can build the Docker image yourself, or find the pre-built Docker image that is available on the GitHub Container Registry.
+
+[getouttahereau/docker-asterisk on ghcr.io](https://ghcr.io/getouttahereau/docker-asterisk)
 
 ## Usage
 
-The simplest way to get up and running is install Docker and run the following command:
+The simplest way to get up and running is to install Docker and run the following command:
 
-    docker run -dit --name=asterisk -v asterisk_config:/etc/asterisk getouttahereau/docker-asterisk
+    docker run -dit --name=asterisk -v asterisk_config:/etc/asterisk ghcr.io/getouttahereau/docker-asterisk
