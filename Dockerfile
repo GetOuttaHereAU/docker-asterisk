@@ -8,7 +8,6 @@ ENV ASTERISK_VERSION=18.6.0 \
 
 # Volumes
 VOLUME /etc/asterisk
-
 RUN apt update && apt -y upgrade && apt -y install \
     # Install runtime dependencies
     curl libedit2 libsqlite3-0 libxml2 \
@@ -18,6 +17,13 @@ RUN apt update && apt -y upgrade && apt -y install \
     # Asterisk installation
     mkdir -p /usr/src/asterisk && cd /usr/src/asterisk && \
     curl https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-${ASTERISK_VERSION}.tar.gz | tar xz --strip-components=1 && \
+
+    # - This seems like overkill. Review and ensure cleanup after building before use.
+    # # Set country code for libvpb1 in advance
+    # echo 'libvpb1 libvpb1/countrycode string 61' | debconf-set-selections -v && \
+    # contrib/scripts/install_prereq install && \
+    # contrib/scripts/get_mp3_source.sh && \
+
     # - Cisco Patch by usecallmanager.nz
     if [ -z ${CISCO+x }]; then \
       echo "Env var CISCO unset, skipping CISCO IP Phone support"; \
