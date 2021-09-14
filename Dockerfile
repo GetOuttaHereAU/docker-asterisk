@@ -51,8 +51,15 @@ COPY --from=builder /etc/init.d/asterisk /etc/init.d/asterisk
 COPY --from=builder /etc/logrotate.d/asterisk /etc/logrotate.d/asterisk
 COPY --from=builder /etc/default/asterisk /etc/default/asterisk
 RUN install_packages libcap2 libedit2 libsqlite3-0 liburiparser1 libxml2 libxslt1.1 && \
+    # Create symlinks 
     ln -s /usr/lib/libasteriskpj.so.2 /usr/lib/libasteriskpj.so && \
     ln -s /usr/lib/libasteriskssl.so.1 /usr/lib/libasteriskssl.so && \
+    # Create asterisk user and make asterisk run as that user
+    adduser --home /var/lib/asterisk/ --shell /usr/sbin/nologin --no-create-home --gecos "Asterisk PBX" --disabled-password --disabled-login asterisk && \
+    usermod -a -G dialout,audio asterisk && \
+    sed -i '/^[ \t]*\[options\][ \t]*/,/\[/s/^[ \t]*;[ \t]*\(\(rungroup\|runuser\)[ \t]*=[ \t]*\).*\([ \t]*(;.*)?\)$/\1asterisk \3/'  /etc/asterisk/asterisk.conf && \
+    sed -i 's/^\([ \t]*\)#\([ \t]*\(AST_USER\|AST_GROUP\)[ \t]*=[ \t]*\).*\([ \t]*\)$/\1\2"asterisk"\4/' /etc/default/asterisk && \
+    chown -R asterisk:asterisk /etc/asterisk /usr/lib/asterisk /var/lib/asterisk /var/spool/asterisk /var/log/asterisk && \
     update-rc.d asterisk defaults && update-rc.d asterisk enable
 CMD service asterisk start && tail -f /dev/null
 EXPOSE 5060/udp 5060 5160/udp 5160 5036/udp ${RTP_START:-10000}-${RTP_END:-20000}/udp
