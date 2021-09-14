@@ -4,6 +4,8 @@
 
 This will build a Docker image for Asterisk - a software implementation of private branch exchange (PBX).
 
+This image includes all of the standard inclusions (eg. sounds) and is 321 MB in total.
+
 * Debian 11.0 Bullseye
 * Asterisk 18.6.0
 * Optional Cisco Enterprise IP Phone support thanks to [usecallmanager.nz](https://usecallmanager.nz/)
@@ -16,4 +18,4 @@ You can build the Docker image yourself, or find the pre-built Docker image that
 
 The simplest way to get up and running is to install Docker and run the following command:
 
-    docker run -dit --name=asterisk -v asterisk_config:/etc/asterisk ghcr.io/getouttahereau/docker-asterisk
+    docker run -d --name=asterisk -v asterisk_config:/etc/asterisk ghcr.io/getouttahereau/docker-asterisk
