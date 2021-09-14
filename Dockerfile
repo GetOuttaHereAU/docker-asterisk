@@ -49,6 +49,7 @@ COPY --from=builder /usr/lib/libasteriskpj.so.2 /usr/lib/libasteriskssl.so.1 /us
 COPY --from=builder /usr/sbin/astcanary /usr/sbin/astdb2bdb /usr/sbin/astdb2sqlite3 /usr/sbin/asterisk /usr/sbin/astgenkey /usr/sbin/astversion /usr/sbin/autosupport /usr/sbin/rasterisk /usr/sbin/safe_asterisk /usr/sbin/
 COPY --from=builder /etc/init.d/asterisk /etc/init.d/asterisk
 COPY --from=builder /etc/logrotate.d/asterisk /etc/logrotate.d/asterisk
+COPY --from=builder /etc/default/asterisk /etc/default/asterisk
 RUN install_packages libcap2 libedit2 libsqlite3-0 liburiparser1 libxml2 libxslt1.1 && \
     ln -s /usr/lib/libasteriskpj.so.2 /usr/lib/libasteriskpj.so && \
     ln -s /usr/lib/libasteriskssl.so.1 /usr/lib/libasteriskssl.so && \
