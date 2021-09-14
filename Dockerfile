@@ -59,7 +59,7 @@ RUN install_packages libcap2 libedit2 libsqlite3-0 liburiparser1 libxml2 libxslt
     usermod -a -G dialout,audio asterisk && \
     sed -i '/^[ \t]*\[options\][ \t]*/,/\[/s/^[ \t]*;[ \t]*\(\(rungroup\|runuser\)[ \t]*=[ \t]*\).*\([ \t]*(;.*)?\)$/\1asterisk \3/'  /etc/asterisk/asterisk.conf && \
     sed -i 's/^\([ \t]*\)#\([ \t]*\(AST_USER\|AST_GROUP\)[ \t]*=[ \t]*\).*\([ \t]*\)$/\1\2"asterisk"\4/' /etc/default/asterisk && \
-    chown -R asterisk:asterisk /etc/asterisk /usr/lib/asterisk /var/lib/asterisk /var/spool/asterisk /var/log/asterisk && \
-    update-rc.d asterisk defaults && update-rc.d asterisk enable
-CMD service asterisk start && tail -f /dev/null
+    chown -R asterisk:asterisk /etc/asterisk /usr/lib/asterisk /var/lib/asterisk /var/spool/asterisk /var/log/asterisk
+# Start asterisk!
+CMD /usr/sbin/asterisk -f -G asterisk -U asterisk
 EXPOSE 5060/udp 5060 5160/udp 5160 5036/udp ${RTP_START:-10000}-${RTP_END:-20000}/udp
