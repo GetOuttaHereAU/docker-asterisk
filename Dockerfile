@@ -34,8 +34,8 @@ RUN \
     make config && \
     make install-logrotate && \
     # Update config with env vars
-    sed -i "/^[ \t]*\[general\]/,/\[/s/^\([ \t]*rtpstart[ \t]*=[ \t]*\).*/\1${RTP_START:-10000}/" /etc/asterisk/rtp.conf && \
-    sed -i "/^[ \t]*\[general\]/,/\[/s/^\([ \t]*rtpend[ \t]*=[ \t]*\).*/\1${RTP_END:-20000}/" /etc/asterisk/rtp.conf
+    sed -i "/^[ \t]*\[general\][ \t]/,/\[/s/^\([ \t]*rtpstart[ \t]*=[ \t]*\).*/\1${RTP_START:-10000}/" /etc/asterisk/rtp.conf && \
+    sed -i "/^[ \t]*\[general\][ \t]/,/\[/s/^\([ \t]*rtpend[ \t]*=[ \t]*\).*/\1${RTP_END:-20000}/" /etc/asterisk/rtp.conf
 
 FROM bitnami/minideb:bullseye
 VOLUME /etc/asterisk
