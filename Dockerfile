@@ -45,16 +45,13 @@ COPY --from=builder /var/lib/asterisk /var/lib/asterisk
 COPY --from=builder /var/spool/asterisk /var/spool/asterisk
 COPY --from=builder /var/run/asterisk /run/asterisk
 COPY --from=builder /var/log/asterisk /var/log/asterisk
-COPY --from=builder /usr/lib/libasteriskpj.so /usr/lib/libasteriskpj.so.2 /usr/lib/libasteriskssl.so /usr/lib/libasteriskssl.so.1 /usr/lib/
+COPY --from=builder /usr/lib/libasteriskpj.so.2 /usr/lib/libasteriskssl.so.1 /usr/lib/
 COPY --from=builder /usr/sbin/astcanary /usr/sbin/astdb2bdb /usr/sbin/astdb2sqlite3 /usr/sbin/asterisk /usr/sbin/astgenkey /usr/sbin/astversion /usr/sbin/autosupport /usr/sbin/rasterisk /usr/sbin/safe_asterisk /usr/sbin/
 COPY --from=builder /etc/init.d/asterisk /etc/init.d/asterisk
 COPY --from=builder /etc/logrotate.d/asterisk /etc/logrotate.d/asterisk
 RUN install_packages libcap2 libedit2 libsqlite3-0 liburiparser1 libxml2 libxslt1.1 && \
+    ln -s /usr/lib/libasteriskpj.so.2 /usr/lib/libasteriskpj.so && \
+    ln -s /usr/lib/libasteriskssl.so.1 /usr/lib/libasteriskssl.so && \
     update-rc.d asterisk defaults && update-rc.d asterisk enable
 CMD service asterisk start && tail -f /dev/null
 EXPOSE 5060/udp 5060 5160/udp 5160 5036/udp ${RTP_START:-10000}-${RTP_END:-20000}/udp
-
-# lrwxrwxrwx 1 root root      18 Sep 14 00:50 /usr/lib/libasteriskpj.so -> libasteriskpj.so.2
-# -rwxr-xr-x 1 root root 9594528 Sep 14 00:50 /usr/lib/libasteriskpj.so.2
-# lrwxrwxrwx 1 root root      19 Sep 14 00:50 /usr/lib/libasteriskssl.so -> libasteriskssl.so.1
-# -rwxr-xr-x 1 root root   99872 Sep 14 00:50 /usr/lib/libasteriskssl.so.1
