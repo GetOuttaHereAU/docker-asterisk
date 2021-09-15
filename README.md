@@ -16,4 +16,4 @@ You can build the Docker image yourself, or find the pre-built Docker image that
 
 The simplest way to get up and running is to install Docker and run the following command:
 
-    docker run -d --name=asterisk -v asterisk_config:/etc/asterisk ghcr.io/getouttahereau/docker-asterisk
+    docker run -d --name=asterisk -v asterisk_config:/etc/asterisk --cap-add NET_ADMIN ghcr.io/getouttahereau/docker-asterisk:latest
