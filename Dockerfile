@@ -50,7 +50,6 @@ COPY --from=builder /usr/sbin/astcanary /usr/sbin/astdb2bdb /usr/sbin/astdb2sqli
 COPY --from=builder /etc/init.d/asterisk /etc/init.d/asterisk
 COPY --from=builder /etc/logrotate.d/asterisk /etc/logrotate.d/asterisk
 COPY --from=builder /etc/default/asterisk /etc/default/asterisk
-RUN install_packages libcap2 libedit2 libsqlite3-0 liburiparser1 libxml2 libxslt1.1 && \
 # Install required packages
 RUN install_packages libcap2 libcodec2-0.9 libcurl4 libedit2 libglib2.0-0 libgmime-3.0-0 libgsm1 libical3 libiksemel3 \
     libjack0 libldap-2.4-2 liblua5.2-0 libneon27 libodbc1 libogg0 libosptk4 libpq5 libradcli4 libresample1 libsnmp40 \
