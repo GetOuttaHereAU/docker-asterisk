@@ -4,9 +4,7 @@
 
 This will build a Docker image for Asterisk - a software implementation of private branch exchange (PBX).
 
-This image includes all of the standard inclusions (eg. sounds) and is 321 MB in total.
-
-* Debian 11.0 Bullseye
+* Debian 11.0 Bullseye (minideb)
 * Asterisk 18.6.0
 * Optional Cisco Enterprise IP Phone support thanks to [usecallmanager.nz](https://usecallmanager.nz/)
 
